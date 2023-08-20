@@ -1,0 +1,54 @@
+using System;
+
+namespace JogoDaForca
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string palavra = "elefante"; // Palavra a ser adivinhada
+            char[] palavraAdivinhada = new char[palavra.Length];
+            for (int i = 0; i < palavra.Length; i++)
+            {
+                palavraAdivinhada[i] = '_';
+            }
+
+            int tentativas = 6; 
+
+            while (tentativas > 0)
+            {
+                Console.WriteLine("Palavra: " + new string(palavraAdivinhada));
+                Console.WriteLine("Tentativas restantes: " + tentativas);
+                Console.Write("Informe uma letra: ");
+                char letra = char.ToLower(Console.ReadKey().KeyChar);
+                Console.WriteLine();
+
+                bool acertou = false;
+                for (int i = 0; i < palavra.Length; i++)
+                {
+                    if (palavra[i] == letra)
+                    {
+                        palavraAdivinhada[i] = letra;
+                        acertou = true;
+                    }
+                }
+
+                if (!acertou)
+                {
+                    tentativas--;
+                }
+
+                if (new string(palavraAdivinhada) == palavra)
+                {
+                    Console.WriteLine("Parabéns, você acertou a palavra!");
+                    break;
+                }
+            }
+
+            if (tentativas == 0)
+            {
+                Console.WriteLine("Você perdeu! A palavra era: " + palavra);
+            }
+        }
+    }
+}
